@@ -13,7 +13,7 @@ export default function App() {
 
       <div className="dataContainer">
         <div className="header">
-        <span>👋 Hey there!</span>
+          Hey there!
         </div>
 
         <div className="bio">
