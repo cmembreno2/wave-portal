@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import abi from "./utils/WavePortal.json";
 import { ethers } from "ethers";
 
 const App = () => {
@@ -8,6 +9,7 @@ const App = () => {
   */
   const [currentAccount, setCurrentAccount] = useState("");
   const contractAddress = "0x5f6504605144708E3aBBcf3A86AeaF96A699028d";
+  const contractABI = abi.abi;
 
   const checkIfWalletIsConnected = async () => {
     try {
