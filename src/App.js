@@ -129,8 +129,8 @@ const App = () => {
         </div>
        
       
-       <h6>Send your message:</h6>
-       <input type="text" name = "kycAddress" value={""} onChange={null}/> 
+      
+       Send your message: <input type="text" name = "kycAddress" value={""} onChange={null}/> 
     
 
         <button className="waveButton" onClick={wave}>
