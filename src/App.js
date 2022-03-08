@@ -11,7 +11,7 @@ const App = () => {
     /*
      * All state property to store all waves
      */
-    const [allWaves, setAllWaves] = useState([]);
+  const [allWaves, setAllWaves] = useState([]);
   const contractAddress = "0x8af1F1fcA30b90e88E10cD760e6c5c2F62537D59";
   const contractABI = abi.abi;
   
@@ -22,49 +22,45 @@ const App = () => {
         const provider = new ethers.providers.Web3Provider(ethereum);
         const signer = provider.getSigner();
         const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+        const waves = await wavePortalContract.getAllWaves();
         
- const waves = await wavePortalContract.getAllWaves();
-        
- let wavesCleaned = [];
-        waves.forEach(wave => {
-          wavesCleaned.push({
-            address: wave.waver,
-            timestamp: new Date(wave.timestamp * 1000),
-            message: wave.message
-          });
-        });
+        let wavesCleaned = [];
+                waves.forEach(wave => {
+                  wavesCleaned.push({
+                    address: wave.waver,
+                    timestamp: new Date(wave.timestamp * 1000),
+                    message: wave.message
+                  });
+                });
 
-  const checkIfWalletIsConnected = async () => {
-    try {
-      const { ethereum } = window;
+        const checkIfWalletIsConnected = async () => {
+          try {
+            const { ethereum } = window;
 
-      if (!ethereum) {
-        console.log("Make sure you have metamask!");
-        return;
-      } else {
-        console.log("We have the ethereum object", ethereum);
-      }
+            if (!ethereum) {
+              console.log("Make sure you have metamask!");
+              return;
+            }       else {
+              console.log("We have the ethereum object", ethereum);
+            }
 
-      /*
-      * Check if we're authorized to access the user's wallet
-      */
-      const accounts = await ethereum.request({ method: "eth_accounts" });
+            /*
+            * Check if we're authorized to access the user's wallet
+            */
+            const accounts = await ethereum.request({ method: "eth_accounts" });
 
-      if (accounts.length !== 0) {
-        const account = accounts[0];
-        console.log("Found an authorized account:", account);
-        setCurrentAccount(account)
-      } else {
-        console.log("No authorized account found")
-      }
-    } catch (error) {
+            if (accounts.length !== 0) {
+              const account = accounts[0];
+              console.log("Found an authorized account:", account);
+              setCurrentAccount(account)
+            } else {
+              console.log("No authorized account found")
+            }
+          } catch (error) {
       console.log(error);
     }
-  }
-  
-  /**
-  * Implement your connectWallet method here
-  */
+  }   
+
   const connectWallet = async () => {
     try {
       const { ethereum } = window;
@@ -75,7 +71,6 @@ const App = () => {
       }
 
       const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-
       console.log("Connected", accounts[0]);
       setCurrentAccount(accounts[0]);
     } catch (error) {
@@ -95,9 +90,6 @@ const App = () => {
         let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
-        /*
-        * Execute the actual wave from your smart contract
-        */
         const waveTxn = await wavePortalContract.wave("this is a message");
         console.log("Mining...", waveTxn.hash);
 
@@ -136,17 +128,14 @@ const App = () => {
         <button className="waveButton" onClick={wave}>
           Wave at Me
         </button>
-
-        {/*
-          * If there is no currentAccount render this button
-          */}
-          {!currentAccount && (
+      
+       {!currentAccount && (
             <button className="waveButton" onClick={connectWallet}>
               Connect Wallet
             </button>
         )}
     
-    {allWaves.map((wave, index) => {
+       {allWaves.map((wave, index) => {
           return (
             <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
               <div>Address: {wave.address}</div>
@@ -154,10 +143,10 @@ const App = () => {
               <div>Message: {wave.message}</div>
             </div>)
         })}
-   
+        
       </div>
     </div>
   );
-}
+};
 
 export default App
