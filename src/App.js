@@ -127,6 +127,8 @@ const App = () => {
         <div className="bio">
           I am farza and I worked on self-driving cars so that's pretty cool right? Connect your Ethereum wallet and wave at me!
         </div>
+        
+       <input type="text" name = "kycAddress" value={""} onChange={null}/>
 
         <button className="waveButton" onClick={wave}>
           Wave at Me
