@@ -97,7 +97,7 @@ const App = () => {
         const signer = provider.getSigner();
         const wavePortalContract = new ethers.Contract(contractAddress, wavePortal.abi, signer);
 
-        let count = await waveportalContract.getTotalWaves();
+        let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
         const waveTxn = await wavePortalContract.wave("message", { gasLimit: 300000 });
