@@ -6,7 +6,7 @@ import abi from "./utils/WavePortal.json";
 const App = () => {
   
   const [currentAccount, setCurrentAccount] = useState("");
-  
+  const [allWaves, setAllWaves] = useState([]);
   const contractAddress = "0xec8e8B9E582B4a2420a334ba554b02f0b57b84F6";
   const contractABI = abi.abi;
 
@@ -80,6 +80,31 @@ const App = () => {
       console.log(error);
     }
   }
+  
+  const getAllWaves = async () => {
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+        const waves = await wavePortalContract.getAllWaves();
+        let wavesCleaned = [];
+        waves.forEach(wave => {
+          wavesCleaned.push({
+            address: wave.waver,
+            timestamp: new Date(wave.timestamp * 1000),
+            message: wave.message
+          });
+        });
+        setAllWaves(wavesCleaned);
+      } else {
+        console.log("Ethereum object doesn't exist!")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }        
 
   useEffect(() => {
     checkIfWalletIsConnected();
