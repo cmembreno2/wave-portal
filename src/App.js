@@ -65,7 +65,7 @@ const App = () => {
         let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
-        const waveTxn = await wavePortalContract.wave();
+        const waveTxn = await wavePortalContract.wave("This is a message");
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
@@ -110,14 +110,11 @@ const App = () => {
     checkIfWalletIsConnected();
   }, [])
 
-  return (
+return (
     <div className="mainContainer">
       <div className="dataContainer">
         <div className="header">
-          <span role="img" aria-label="waving hand">
-            👋
-          </span>{" "}
-          Hey there!
+          👋 Hey there!
         </div>
 
         <div className="bio">
@@ -128,14 +125,20 @@ const App = () => {
           Wave at Me
         </button>
 
-        {/*
-        * If there is no currentAccount render this button
-        */}
         {!currentAccount && (
           <button className="waveButton" onClick={connectWallet}>
             Connect Wallet
           </button>
         )}
+
+        {allWaves.map((wave, index) => {
+          return (
+            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
+              <div>Address: {wave.address}</div>
+              <div>Time: {wave.timestamp.toString()}</div>
+              <div>Message: {wave.message}</div>
+            </div>)
+        })}
       </div>
     </div>
   );
