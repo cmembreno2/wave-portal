@@ -120,7 +120,9 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected();
-  }, [])
+    
+    // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="mainContainer">
