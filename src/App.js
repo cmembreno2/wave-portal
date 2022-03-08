@@ -129,9 +129,9 @@ const App = () => {
         </div>
        
       
-      
-       Send your message: <input type="text" name = "kycAddress" value={""} onChange={null}/> 
-    
+       <div className="dataContainer">
+       <h4>Send your message:</h4> <input type="text" name = "kycAddress" placeholder={"Type new wave here....."} onChange={null}/> 
+       </div>
 
         <button className="waveButton" onClick={wave}>
           Wave at Me
