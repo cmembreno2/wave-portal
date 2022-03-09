@@ -6,6 +6,7 @@ import wavePortal from './utils/WavePortal.json';
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState("");
   const [allWaves, setAllWaves] = useState([]);
+  const [message,setMessage] = useState("");
   const contractAddress = "0x00CbC6EA93709AF366cD180AAD062bf419A2323E";
 
   const getAllWaves = async () => {
@@ -92,7 +93,7 @@ const App = () => {
         let count = await wavePortalContract.getTotalWaves();
         console.log("Retrieved total wave count...", count.toNumber());
 
-        const waveTxn = await wavePortalContract.wave("This is the wave", { gasLimit: 300000 });
+        const waveTxn = await wavePortalContract.wave(message, { gasLimit: 300000 });
         console.log("Mining...", waveTxn.hash);
 
         await waveTxn.wait();
@@ -125,12 +126,13 @@ const App = () => {
         </div>
 
         <div className="bio">
-          I am farza and I worked on self-driving cars so that's pretty cool right? Connect your Ethereum wallet and wave at me!
+          I am Carlos M and I worked on Maya Financial´s so that's pretty cool right? Connect your Ethereum wallet and wave at me!
         </div>
        
       
        <div className="dataContainer">
-       <h4>Send your message:</h4> <input type="text" name = "kycAddress" placeholder={"Type new wave here....."} onChange={null}/> 
+       <h4>What are you thinking?</h4>
+       <input type="text" name = "waveInput" value={message} onChange={(event)=>setMessage(event.target.value)}/> 
        </div>
 
         <button className="waveButton" onClick={wave}>
