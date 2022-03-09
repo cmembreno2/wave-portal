@@ -122,11 +122,11 @@ const App = () => {
           <span role="img" aria-label="waving hand">
             👋
           </span>{" "}
-          Hey there!
+          Hey there! Wellcome to Crypto Blog
         </div>
 
         <div className="bio">
-          I am Carlos M and I worked on Maya Financial´s so that's pretty cool right? Connect your Ethereum wallet and wave at me!
+          I am Carlos M and I worked on Maya Financial´s so that's pretty cool right? Connect your Ethereum wallet and wave at me! Please let us know what is your opinion about blockchain technology, how much do you know about it?
         </div>
        
       
