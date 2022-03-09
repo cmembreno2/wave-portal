@@ -131,7 +131,7 @@ const App = () => {
        
       
        <div className="dataContainer">
-       <h4>What are you thinking?</h4>
+       <h4>Wave to share with the community</h4>
        <input type="text" name = "waveInput" value={message} onChange={(event)=>setMessage(event.target.value)}/> 
        </div>
 
